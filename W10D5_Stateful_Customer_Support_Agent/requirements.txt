@@ -1,0 +1,6 @@
+crewai>=1.0,<2.0
+langgraph>=1.0,<2.0
+langgraph-checkpoint-sqlite
+mlflow>=3.0,<4.0
+ragas>=0.4,<0.5
+pytest>=8.0

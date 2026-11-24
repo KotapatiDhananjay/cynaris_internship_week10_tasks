@@ -1,0 +1,165 @@
+# W10D1 - LangGraph Stateful Agent Graphs
+
+## Overview
+
+This project implements a three-node stateful agent graph using LangGraph.
+
+The graph classifies user input, pauses for human review, and conditionally generates a response.
+
+## Learning Objectives
+
+- Build a stateful graph using LangGraph.
+- Create three nodes: classify, route, and respond.
+- Implement conditional edges.
+- Use human-in-the-loop interrupts.
+- Resume graph execution using Command(resume=...).
+- Test classification and routing with five inputs.
+
+## Architecture
+
+START -> CLASSIFY -> ROUTE -> CONDITIONAL ROUTING
+
+Conditional outcomes:
+
+- Approved and safe -> RESPOND -> END
+- Rejected -> END
+- Unsafe -> END
+
+## Technologies
+
+- Python
+- LangGraph
+- pytest
+
+## Project Structure
+
+```text
+W10D1_LangGraph_Stateful_Agent_Graphs/
+|
+|-- src/
+|   |-- __init__.py
+|   |-- graph.py
+|
+|-- tests/
+|   |-- __init__.py
+|   |-- test_graph.py
+|
+|-- output/
+|-- main.py
+|-- requirements.txt
+|-- README.md
+|-- SELF_REVIEW.md
+|-- .gitignore
+```
+
+## Installation
+
+Create and activate a virtual environment:
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+## Run the Application
+
+```powershell
+python main.py
+```
+
+Enter a message. The graph classifies it and pauses for human review.
+
+Enter:
+
+- approve - continue processing if the input is safe.
+- reject - stop the workflow.
+
+Enter exit to close the program.
+
+## Run Tests
+
+```powershell
+pytest tests -v
+```
+
+The test suite checks five input categories:
+
+1. Greeting
+2. General question
+3. Calculation
+4. Coding
+5. Unsafe request
+
+It also checks human rejection and graph node creation.
+
+## Human-in-the-Loop
+
+The route node uses LangGraph interrupt() to pause execution.
+
+The application receives the human decision and resumes execution using:
+
+```python
+Command(resume="approve")
+```
+
+An InMemorySaver checkpointer stores graph state during execution. The same thread ID is used when resuming.
+
+## Learning Outcomes
+
+- Stateful graph construction
+- Conditional routing
+- Human approval workflows
+- Graph state management
+- Automated testing
+
+## Author
+
+Kotapati Dhananjay  
+B.Tech Information Technology  
+Garden City University
+
+GitHub: https://github.com/KotapatiDhananjay
+
+## Internship
+
+AI/ML 3M Internship Program  
+Week 10 - Day 1
+'@ | Set-Content README.md -Encoding UTF8
+
+@'
+# W10D1 Self-Review Checklist
+
+- [ ] Created the three application nodes.
+- [ ] Implemented input classification.
+- [ ] Implemented conditional routing.
+- [ ] Verified five input categories.
+- [ ] Implemented human-in-the-loop interrupt.
+- [ ] Tested pause and resume.
+- [ ] Tested human rejection.
+- [ ] Ran pytest successfully.
+- [ ] Saved test output evidence.
+- [ ] Reviewed code with CIA Full Stack Mentor Mode.
+- [ ] Completed at least two CIA interactions.
+- [ ] Created the required Git branch.
+- [ ] Created at least two commits.
+- [ ] Pushed the branch to GitHub.
+- [ ] Created a Pull Request.
+'@ | Set-Content SELF_REVIEW.md -Encoding UTF8
+
+@'
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

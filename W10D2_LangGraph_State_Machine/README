@@ -1,0 +1,160 @@
+# W10D2 - LangGraph State Machines & Conditional Edges
+
+## Overview
+
+This project implements a three-node state machine using LangGraph.
+
+It classifies user input, routes execution through conditional edges, and uses human-in-the-loop interruption to control workflow execution.
+
+## Architecture
+
+START -> CLASSIFY -> ROUTE -> CONDITIONAL EDGE
+
+- Approved and safe input -> RESPOND -> END
+- Rejected input -> END
+- Unsafe input -> END
+
+## Three Application Nodes
+
+1. **Classify:** Identifies the input category.
+2. **Route:** Pauses execution and requests human approval.
+3. **Respond:** Generates a response for approved and safe requests.
+
+## Input Categories
+
+- Greeting
+- General question
+- Calculation
+- Coding
+- Unsafe request
+
+## Technologies
+
+- Python
+- LangGraph
+- pytest
+
+## Project Structure
+
+```text
+W10D2_LangGraph_State_Machine/
+|
+|-- src/
+|   |-- __init__.py
+|   |-- state_machine.py
+|
+|-- tests/
+|   |-- __init__.py
+|   |-- test_state_machine.py
+|
+|-- output/
+|-- main.py
+|-- requirements.txt
+|-- README.md
+|-- SELF_REVIEW.md
+|-- .gitignore
+```
+
+## Installation
+
+Create a virtual environment:
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+## Run the Application
+
+```powershell
+python main.py
+```
+
+Enter a message and wait for the human-review prompt.
+
+Enter `approve` to continue or `reject` to stop the workflow.
+
+Enter `exit` to close the application.
+
+## Run Tests
+
+```powershell
+pytest tests -v
+```
+
+The tests verify five input categories, human approval, human rejection, unsafe input handling, and graph structure.
+
+## Human-in-the-Loop
+
+LangGraph's `interrupt()` pauses graph execution.
+
+The workflow resumes using:
+
+```python
+Command(resume="approve")
+```
+
+An `InMemorySaver` checkpointer stores the state during the interruption. The same thread ID is used when resuming.
+
+## Learning Outcomes
+
+- Stateful graph construction
+- Classification and routing
+- Conditional edges
+- State transitions
+- Human-in-the-loop workflows
+- Pause and resume execution
+- Automated testing
+
+## Author
+
+Kotapati Dhananjay  
+B.Tech Information Technology  
+Garden City University
+
+GitHub: https://github.com/KotapatiDhananjay
+
+## Internship
+
+AI/ML 3M Internship Program  
+Week 10 - Day 2
+'@ | Set-Content README.md -Encoding UTF8
+
+@'
+# W10D2 Self-Review Checklist
+
+- [ ] Created three application nodes.
+- [ ] Implemented input classification.
+- [ ] Implemented conditional edges.
+- [ ] Tested five input categories.
+- [ ] Verified approved requests reach respond.
+- [ ] Verified rejected requests stop.
+- [ ] Verified unsafe requests cannot reach respond.
+- [ ] Implemented human-in-the-loop interrupt.
+- [ ] Tested pause and resume using the same thread ID.
+- [ ] Ran all pytest tests successfully.
+- [ ] Saved test output evidence.
+- [ ] Reviewed code using CIA Full Stack Mentor Mode.
+- [ ] Completed at least two CIA interactions.
+- [ ] Created at least two descriptive Git commits.
+- [ ] Pushed the branch to GitHub.
+- [ ] Created a Pull Request.
+'@ | Set-Content SELF_REVIEW.md -Encoding UTF8
+
+@'
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
